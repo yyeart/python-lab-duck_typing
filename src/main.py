@@ -1,20 +1,28 @@
-from src.power import power_function
-from src.constants import SAMPLE_CONSTANT
+import random
 
+from src.receiver import TaskReceiver
+from src.sources.api_source import ApiSource
+from src.sources.file_source import FileSource
+from src.sources.gen_source import GeneratorSource
+from src.setup_logger import logger
 
 def main() -> None:
-    """
-    Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-    :return: Данная функция ничего не возвращает
-    """
+    receiver = TaskReceiver()
 
-    target, degree = map(int, input("Введите два числа разделенные пробелом: ").split(" "))
+    sources = [
+        FileSource("src\\sources\\input.json"),
+        GeneratorSource(random.randint(3, 10)),
+        ApiSource()
+    ]
 
-    result = power_function(target=target, power=degree)
+    logger.info('Начало сбора задач...')
+    receiver.receive_tasks(sources)
+    result = receiver.get_received_tasks()
+    logger.info(f'Сбор завершен. Всего задач: {len(result)}')
 
-    print(result)
+    print('Список задач:')
+    for task in result:
+        print(task)
 
-    print(SAMPLE_CONSTANT)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
