@@ -1,13 +1,20 @@
 import json
 
 from src.core.models import Task
-from src.setup_logger import logger
+from src.logger.setup_logger import logger
 
 class FileSource:
+    """Класс, представляющий источник данных из файла."""
     def __init__(self, path: str):
         self.path = path
 
     def get_tasks(self) -> list[Task]:
+        """
+        Метод для получения задач из файла.
+
+        :returns: Список задач, полученных из файла.
+        :rtype: list[Task]
+        """
         print(f'Чтение из {self.path}...')
         tasks = []
         try:

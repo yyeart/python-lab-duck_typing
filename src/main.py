@@ -1,22 +1,17 @@
-import random
-
+from src.constants import SOURCES
 from src.receiver import TaskReceiver
-from src.sources.api_source import ApiSource
-from src.sources.file_source import FileSource
-from src.sources.gen_source import GeneratorSource
-from src.setup_logger import logger
+from src.logger.setup_logger import logger
 
 def main() -> None:
+    """
+    Главный модуль запуска приложения.
+
+    :returns: Ничего не возвращает.
+    """
     receiver = TaskReceiver()
 
-    sources = [
-        FileSource("src\\sources\\input.json"),
-        GeneratorSource(random.randint(3, 10)),
-        ApiSource()
-    ]
-
     logger.info('Начало сбора задач...')
-    receiver.receive_tasks(sources)
+    receiver.receive_tasks(SOURCES)
     result = receiver.get_received_tasks()
     logger.info(f'Сбор завершен. Всего задач: {len(result)}')
 

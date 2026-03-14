@@ -1,14 +1,21 @@
 import random
 
 from src.core.models import Task
-from src.setup_logger import logger
+from src.logger.setup_logger import logger
 
 class GeneratorSource:
+    """Класс, представляющий источник данных, который генерирует задачи."""
     def __init__(self, task_cnt: int):
         self.task_cnt = task_cnt
 
     def get_tasks(self) -> list[Task]:
-        print("Генерация случайных задач...")
+        """
+        Метод для генерации задач.
+
+        :returns: Список задач, сгенерированных источником.
+        :rtype: list[Task]
+        """
+        print("Генерация задач...")
         try:
             tasks = [Task(id=random.randint(100, 1000),
                      payload=f'Payload {i}') for i in range(self.task_cnt)]

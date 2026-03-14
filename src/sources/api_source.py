@@ -1,8 +1,15 @@
 from src.core.models import Task
-from src.setup_logger import logger
+from src.logger.setup_logger import logger
 
 class ApiSource:
+    """Класс, представляющий источник данных из API."""
     def get_tasks(self) -> list[Task]:
+        """
+        Метод-заглушка для получения задач из API.
+
+        :returns: Список задач, полученных из API.
+        :rtype: list[Task]
+        """
         print('REST запрос...')
         logger.info('Получены 3 задачи из API')
         return [

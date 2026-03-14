@@ -6,4 +6,5 @@ from src.core.models import Task
 class TaskSource(Protocol):
     """Контракт источника задач"""
     def get_tasks(self) -> list[Task]:
+        """Метод для получения задач"""
         ...
